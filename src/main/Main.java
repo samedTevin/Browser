@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utils.WebUtil;
+
 
 import java.util.Objects;
 
@@ -17,8 +19,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Browser.fxml")));
+        WebUtil.stage = stage;
         stage.setTitle("Web Browser");
-        stage.setResizable(false);
         stage.setScene(new Scene(root,1500,900));
         stage.show();
     }

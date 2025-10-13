@@ -1,112 +1,88 @@
 package controller;
 
-import javafx.collections.ObservableList;
+
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import utils.WebUtil;
+
+
 
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 public class BrowserController implements Initializable {
 
     @FXML
     private WebView webView;
-
-    private WebEngine webEngine;
-
-    @FXML
-    private TextField searchField;
-
-    private double webZoom;
-
-    private WebHistory history;
-
     @FXML
     private TabPane tabPane;
-
+    @FXML
+    private TextField searchField;
+    @FXML
+    private TextField textSearch;
+    private WebEngine webEngine;
+    public static Tab tab;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         webEngine = webView.getEngine();
         webEngine.load("https://www.google.com");
-        webZoom = 1;
+        TabContentController.tabPane = tabPane;
     }
 
-    public void loadWeb() {
-
-        if(searchField.getText().trim().isEmpty() || searchField == null){
-            return;
-        }
-        String textField = searchField.getText().trim();
-        String url;
-
-        if(textField.startsWith("http://") || textField.startsWith("https://")) {
-            url = textField;
-        }
-        else if(textField.contains(".")){
-            url = "https://" + textField;
-        }
-        else{
-            url = "https://www.google.com/search?q=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
-        }
-        searchField.clear();
-        searchField.setText(url);
-        webEngine.load(url);
+    @FXML
+    private void loadWeb() {
+        WebUtil.setTab(tabPane,searchField);
+        WebUtil.loadWeb(searchField,webEngine);
     }
 
-    public void validateUrl(){
+    @FXML
+    private void forward(){
+       WebUtil.forward(webEngine);
+    }
+
+    @FXML
+    private void backward(){
+       WebUtil.backward(webEngine);
+    }
+
+    @FXML
+    private void History(){
 
     }
 
-    public void forward(){
-        history = webEngine.getHistory();
-        ObservableList<WebHistory.Entry> entries = history.getEntries();
-       history.go(1);
+    @FXML
+    private void zoomIn(){
+        WebUtil.zoomIn(webView, BrowserController.tab);
     }
 
-    public void backward(){
-        history = webEngine.getHistory();
-        ObservableList<WebHistory.Entry> entries = history.getEntries();
-        history.go(-1);
+    @FXML
+    private void zoomOut(){
+        WebUtil.zoomOut(webView, BrowserController.tab);
     }
 
-    public void History(){
-        history = webEngine.getHistory();
-        ObservableList<WebHistory.Entry> entries = history.getEntries();
+    @FXML
+    private void refresh(){
+       WebUtil.refresh(webEngine);
     }
 
-    public void zoomIn(){
-        webZoom+=0.25;
-        webView.setZoom(webZoom);
+    @FXML
+    private void home(){
+        WebUtil.home(webEngine,searchField);
     }
 
-    public void zoomOut(){
-        webZoom-=0.25;
-        webView.setZoom(webZoom);
-    }
-
-    public void refresh(){
-        webEngine.reload();
-    }
-
-    public void home(){
-        webEngine.load("https://www.google.com");
-    }
-
-    public void addTab(){
+    @FXML
+    private void addTab(){
         try{
-            Tab tab = new Tab("New Page");
+            tab = new Tab("New Page");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TabContent.fxml"));
             Parent controller = loader.load();
 
@@ -118,6 +94,29 @@ public class BrowserController implements Initializable {
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void printPage(){
+        WebUtil.printPage(webView);
+    }
+
+    @FXML
+    private void takeScreenshot(){
+        WebUtil.screenshot(webView);
+    }
+
+    @FXML
+    private void searchText(){
+        if(textSearch == null){
+            return;
+        }
+        WebUtil.searchText(webView, textSearch.getText().trim());
+    }
+
+    @FXML
+    private void fullScreen(){
+        WebUtil.fullScreen();
     }
 
 
