@@ -32,6 +32,7 @@ public class WebUtil {
     private static Map<Tab, Double> zoomLevels = new HashMap<Tab, Double>();
     private static double zoom;
     public static List<String> bookmarks = new ArrayList<String>();
+    public static String currentBrowser = "Google";
 
 
 
@@ -54,7 +55,21 @@ public class WebUtil {
             url = "http://" + textField;
         }
         else{
-            url = "https://www.google.com/search?q=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
+            if(currentBrowser.equals("Google")){
+                url = "https://www.google.com/search?q=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
+            }
+            else if(currentBrowser.equals("Yandex")){
+                url = "https://yandex.com/search/?text=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
+            }
+            else if(currentBrowser.equals("DuckDuckGo")){
+                url ="https://duckduckgo.com/?q=" +  URLEncoder.encode(textField, StandardCharsets.UTF_8);
+            }
+            else if(currentBrowser.equals("Bing")){
+                url = "https://www.bing.com/search?q" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
+            }
+            else{
+                url = "https://search.yahoo.com/search?p=" +  URLEncoder.encode(textField, StandardCharsets.UTF_8);
+            }
         }
 
         searchField.setText(url);
@@ -123,9 +138,27 @@ public class WebUtil {
         webEngine.reload();
     }
 
-    public static void home(WebEngine webEngine, TextField searchField) {
-        webEngine.load("https://www.google.com");
-        searchField.setText("Enter a URL or search on Google");
+    public static void home( String home, TextField searchField, WebEngine webEngine) {
+
+        String homeUrl;
+
+        if(currentBrowser.equals("Google")){
+            homeUrl = "https://www.google.com";
+        }
+        else if(currentBrowser.equals("Yandex")){
+            homeUrl = "https://www.yandex.com";
+        }
+        else if(currentBrowser.equals("DuckDuckGo")){
+            homeUrl = "https://duckduckgo.com/";
+        }
+        else if(currentBrowser.equals("Bing")){
+            homeUrl = "https://www.bing.com";
+        }
+        else{
+            homeUrl ="https://www.yahoo.com";
+        }
+        searchField.setPromptText("Enter a URL or search on " + currentBrowser);
+        webEngine.load(homeUrl);
     }
 
     public static void history(WebEngine webEngine) {
@@ -176,12 +209,17 @@ public class WebUtil {
         webView.getEngine().executeScript("window.find('" + searchText + "')");
     }
 
-    public static void fullScreen(){
-        stage.setFullScreen(true);
+    public static void fullScreen(CheckMenuItem menuItem){
+        if(menuItem.isSelected()){
+            stage.setFullScreen(true);
+        }
+        else{
+            stage.setFullScreen(false);
+        }
     }
 
     public static void addBookmark(WebView webView) {
-        Path filePath = Paths.get("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\screenshots\\bookmark.txt");
+        Path filePath = Paths.get("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\bookmarks\\bookmark.txt");
         String url = webView.getEngine().getLocation();
         bookmarks.add(url);
         try {
@@ -201,5 +239,37 @@ public class WebUtil {
         }
     }
 
+
+    public static void setGoogle(WebEngine webEngine, TextField search){
+        currentBrowser = "Google";
+        home(currentBrowser, search, webEngine);
     }
+
+    public static void setYandex(WebEngine webEngine, TextField search){
+        currentBrowser = "Yandex";
+        home(currentBrowser, search, webEngine);
+    }
+
+    public static void setDuck(WebEngine webEngine, TextField search){
+        currentBrowser = "DuckDuckGo";
+        home(currentBrowser, search, webEngine);
+    }
+
+    public static void setBing(WebEngine webEngine, TextField search){
+        currentBrowser = "Bing";
+        home(currentBrowser, search, webEngine);
+    }
+
+    public static void setYahoo(WebEngine webEngine, TextField search){
+        currentBrowser = "Yahoo";
+        home(currentBrowser, search, webEngine);
+    }
+
+    public static void historyTab(){
+
+    }
+
+
+
+}
 

@@ -72,7 +72,7 @@ public class TabContentController implements Initializable {
 
     @FXML
     private void tabHome(){
-        WebUtil.home(webEngine, tabSearchField);
+        WebUtil.home(WebUtil.currentBrowser,tabSearchField,webEngine);
     }
 
 

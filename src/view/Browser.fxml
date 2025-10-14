@@ -2,7 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -55,15 +59,46 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
-                              <TextField fx:id="searchField" onAction="#loadWeb" prefHeight="25.0" prefWidth="392.0" promptText="Search on Google or enter a URL" />
-                              <Button mnemonicParsing="false" onAction="#takeScreenshot" text="Screenshot" />
-                              <Button mnemonicParsing="false" onAction="#printPage" text="Print" />
+                              <TextField fx:id="searchField" onAction="#loadWeb" prefHeight="25.0" prefWidth="750.0" promptText="Search on Google or enter a URL" />
+                              <MenuBar>
+                                <menus>
+                                  <Menu mnemonicParsing="false" text="View">
+                                    <items>
+                                      <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Zoom In" />
+                                          <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom Out" />
+                                          <CheckMenuItem fx:id="checkFullscreen" mnemonicParsing="false" onAction="#fullScreen" text="Full Screen" />
+                                    </items>
+                                  </Menu>
+                                  <Menu mnemonicParsing="false" text="Bookmarks">
+                                    <items>
+                                      <MenuItem mnemonicParsing="false" onAction="#addBookmark" text="Add Bookmark" />
+                                          <MenuItem mnemonicParsing="false" text="Add Bookmark" />
+                                    </items>
+                                  </Menu>
+                                    <Menu mnemonicParsing="false" text="Web History">
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" onAction="#historyTab" text="History" />
+                                      </items>
+                                    </Menu>
+                                  <Menu mnemonicParsing="false" text="Tools">
+                                    <items>
+                                      <MenuItem mnemonicParsing="false" onAction="#printPage" text="Print" />
+                                          <MenuItem mnemonicParsing="false" onAction="#takeScreenshot" text="Screenshot" />
+                                    </items>
+                                  </Menu>
+                                </menus>
+                              </MenuBar>
                               <TextField fx:id="textSearch" onAction="#searchText" promptText="search text" />
-                              <Button mnemonicParsing="false" onAction="#zoomIn" text="Zoom In" />
-                              <Button mnemonicParsing="false" onAction="#zoomOut" text="Zoom Out" />
-                              <Button mnemonicParsing="false" onAction="#fullScreen" text="Full Screen" />
                               <MenuButton fx:id="bookmarkMenu" mnemonicParsing="false" onAction="#selectBookmark" text="Bookmarks" />
-                              <Button mnemonicParsing="false" onAction="#addBookmark" text="Add Bookmark" />
+                              <MenuButton mnemonicParsing="false" text="Browsers">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#setGoogle" text="Google" />
+                                  <MenuItem mnemonicParsing="false" onAction="#setYandex" text="Yandex" />
+                                    <MenuItem mnemonicParsing="false" onAction="#setDuck" text="DuckDuckGo" />
+                                    <MenuItem mnemonicParsing="false" onAction="#setBing" text="Bing" />
+                                    <MenuItem mnemonicParsing="false" onAction="#setYahoo" text="Yahoo" />
+                                </items>
+                              </MenuButton>
                           </items>
                         </ToolBar>
                      </top>

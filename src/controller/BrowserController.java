@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.controlsfx.control.textfield.TextFields;
@@ -32,13 +29,22 @@ public class BrowserController implements Initializable {
     private TextField textSearch;
     @FXML
     private MenuButton bookmarkMenu;
+    @FXML
+    private MenuItem google;
+    @FXML
+    private MenuItem yandex;
+    @FXML
+    private MenuItem duck;
+    private MenuItem[] menuItems = {google,yandex,duck};
+    @FXML
+    private CheckMenuItem checkFullscreen;
     private WebEngine webEngine;
     public static Tab tab;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         webEngine = webView.getEngine();
-        webEngine.load("https://www.google.com");
+        home();
         TabContentController.tabPane = tabPane;
         selectBookmark();
         TextFields.bindAutoCompletion(searchField,WebUtil.bookmarks);
@@ -82,7 +88,7 @@ public class BrowserController implements Initializable {
 
     @FXML
     private void home(){
-        WebUtil.home(webEngine,searchField);
+        WebUtil.home(WebUtil.currentBrowser, searchField, webEngine);
     }
 
     @FXML
@@ -100,6 +106,22 @@ public class BrowserController implements Initializable {
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void historyTab(){
+        try{
+            tab = new Tab("History");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HistoryTab.fxml"));
+            Parent controller = loader.load();
+
+            tab.setContent(controller);
+            tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab);
+            tabPane.getSelectionModel().select(tab);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
@@ -122,7 +144,7 @@ public class BrowserController implements Initializable {
 
     @FXML
     private void fullScreen(){
-        WebUtil.fullScreen();
+        WebUtil.fullScreen(checkFullscreen);
     }
 
     @FXML
@@ -135,6 +157,31 @@ public class BrowserController implements Initializable {
     @FXML
     private void selectBookmark(){
         WebUtil.selectBookmark(bookmarkMenu,webView);
+    }
+
+    @FXML
+    private void setGoogle(){
+        WebUtil.setGoogle(webEngine,searchField);
+    }
+
+    @FXML
+    private void setYandex(){
+        WebUtil.setYandex(webEngine,searchField);
+    }
+
+    @FXML
+    private void setDuck(){
+        WebUtil.setDuck(webEngine,searchField);
+    }
+
+    @FXML
+    private void setBing(){
+        WebUtil.setBing(webEngine,searchField);
+    }
+
+    @FXML
+    private void setYahoo(){
+        WebUtil.setYahoo(webEngine,searchField);
     }
 
 
