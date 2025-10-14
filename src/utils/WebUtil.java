@@ -4,9 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.print.PrinterJob;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
@@ -14,13 +12,17 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 
-
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class WebUtil {
@@ -29,6 +31,7 @@ public class WebUtil {
     public static Stage stage;
     private static Map<Tab, Double> zoomLevels = new HashMap<Tab, Double>();
     private static double zoom;
+    public static List<String> bookmarks = new ArrayList<String>();
 
 
 
@@ -177,4 +180,26 @@ public class WebUtil {
         stage.setFullScreen(true);
     }
 
-}
+    public static void addBookmark(WebView webView) {
+        Path filePath = Paths.get("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\screenshots\\bookmark.txt");
+        String url = webView.getEngine().getLocation();
+        bookmarks.add(url);
+        try {
+            Files.write(filePath,bookmarks,StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        WebAlerts.information("Bookmark added successfully");
+    }
+
+    public static void selectBookmark(MenuButton menuButton, WebView webView){
+        menuButton.getItems().clear();
+        for(String bookmark : bookmarks){
+            MenuItem menuItem = new MenuItem(bookmark);
+            menuItem.setOnAction(event -> {webView.getEngine().load(bookmark);});
+            menuButton.getItems().add(menuItem);
+        }
+    }
+
+    }
+

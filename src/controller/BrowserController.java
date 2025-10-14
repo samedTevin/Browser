@@ -6,15 +6,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.controlsfx.control.textfield.TextFields;
 import utils.WebUtil;
 
 
-
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,6 +30,8 @@ public class BrowserController implements Initializable {
     private TextField searchField;
     @FXML
     private TextField textSearch;
+    @FXML
+    private MenuButton bookmarkMenu;
     private WebEngine webEngine;
     public static Tab tab;
 
@@ -36,6 +40,8 @@ public class BrowserController implements Initializable {
         webEngine = webView.getEngine();
         webEngine.load("https://www.google.com");
         TabContentController.tabPane = tabPane;
+        selectBookmark();
+        TextFields.bindAutoCompletion(searchField,WebUtil.bookmarks);
     }
 
     @FXML
@@ -118,6 +124,24 @@ public class BrowserController implements Initializable {
     private void fullScreen(){
         WebUtil.fullScreen();
     }
+
+    @FXML
+    private void addBookmark() throws IOException {
+        WebUtil.addBookmark(webView);
+        selectBookmark();
+        TextFields.bindAutoCompletion(searchField,WebUtil.bookmarks);
+    }
+
+    @FXML
+    private void selectBookmark(){
+        WebUtil.selectBookmark(bookmarkMenu,webView);
+    }
+
+
+
+
+
+
 
 
 }
