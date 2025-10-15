@@ -64,9 +64,30 @@
                                 <menus>
                                   <Menu mnemonicParsing="false" text="View">
                                     <items>
-                                      <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Zoom In" />
-                                          <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom Out" />
-                                          <CheckMenuItem fx:id="checkFullscreen" mnemonicParsing="false" onAction="#fullScreen" text="Full Screen" />
+                                      <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Zoom In">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/zoom-in.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></MenuItem>
+                                          <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom Out">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/zoom-out.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></MenuItem>
+                                          <CheckMenuItem fx:id="checkFullscreen" mnemonicParsing="false" onAction="#fullScreen" text="Full Screen">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/full-size.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></CheckMenuItem>
                                     </items>
                                   </Menu>
                                   <Menu mnemonicParsing="false" text="Bookmarks">
@@ -82,23 +103,85 @@
                                     </Menu>
                                   <Menu mnemonicParsing="false" text="Tools">
                                     <items>
-                                      <MenuItem mnemonicParsing="false" onAction="#printPage" text="Print" />
-                                          <MenuItem mnemonicParsing="false" onAction="#takeScreenshot" text="Screenshot" />
+                                      <MenuItem mnemonicParsing="false" onAction="#printPage" text="Print">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/printing.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></MenuItem>
+                                          <MenuItem mnemonicParsing="false" onAction="#takeScreenshot" text="Screenshot">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/screenshot.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></MenuItem>
                                     </items>
                                   </Menu>
+                                    <Menu mnemonicParsing="false" text="Browsers">
+                                       <items>
+                                        <MenuItem mnemonicParsing="false" onAction="#setGoogle" text="Google">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/google.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
+                                        <MenuItem mnemonicParsing="false" onAction="#setYandex" text="Yandex">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/yandex.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
+                                          <MenuItem mnemonicParsing="false" onAction="#setDuck" text="DuckDuckGo">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/duckgo.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
+                                          <MenuItem mnemonicParsing="false" onAction="#setBing" text="Bing">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/bing.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
+                                          <MenuItem mnemonicParsing="false" onAction="#setYahoo" text="Yahoo">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/yahoo.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
+                                       </items>
+                                    </Menu>
+                                    <Menu mnemonicParsing="false" text="Settings">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="Favorites" />
+                                          <MenuItem mnemonicParsing="false" text="URL Filter" />
+                                          <CheckMenuItem fx:id="blockPop" mnemonicParsing="false" onAction="#blockPopup" text="Pop-up Blocker" />
+                                          <CheckMenuItem fx:id="verifySecurity" mnemonicParsing="false" onAction="#verifySiteSecurity" text="Verify Site Security" />
+                                       </items>
+                                    </Menu>
                                 </menus>
                               </MenuBar>
-                              <TextField fx:id="textSearch" onAction="#searchText" promptText="search text" />
+                              <TextField fx:id="textSearch" onAction="#searchText" prefHeight="25.0" prefWidth="92.0" promptText="search text" />
                               <MenuButton fx:id="bookmarkMenu" mnemonicParsing="false" onAction="#selectBookmark" text="Bookmarks" />
-                              <MenuButton mnemonicParsing="false" text="Browsers">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#setGoogle" text="Google" />
-                                  <MenuItem mnemonicParsing="false" onAction="#setYandex" text="Yandex" />
-                                    <MenuItem mnemonicParsing="false" onAction="#setDuck" text="DuckDuckGo" />
-                                    <MenuItem mnemonicParsing="false" onAction="#setBing" text="Bing" />
-                                    <MenuItem mnemonicParsing="false" onAction="#setYahoo" text="Yahoo" />
-                                </items>
-                              </MenuButton>
                           </items>
                         </ToolBar>
                      </top>

@@ -269,6 +269,29 @@ public class WebUtil {
 
     }
 
+    public static void blockPopup(WebEngine webEngine, CheckMenuItem menuItem){
+        if(menuItem.isSelected()){
+            webEngine.setCreatePopupHandler(config ->{
+                WebAlerts.warning("Popup blocked: " + config.isResizable());
+            return null;
+        });
+        }
+        else{
+            webEngine.setCreatePopupHandler(null);
+        }
+    }
+
+    public static void verifySite(WebEngine webEngine, CheckMenuItem menuItem){
+            webEngine.locationProperty().addListener((observable, oldValue, newValue) -> {
+                if(menuItem.isSelected()){
+                    if(!newValue.startsWith("https://")){
+                        WebAlerts.warning("Unsecure URL: " + newValue);
+                    }
+                }
+            });
+
+    }
+
 
 
 }

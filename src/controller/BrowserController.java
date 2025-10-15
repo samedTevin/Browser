@@ -38,6 +38,10 @@ public class BrowserController implements Initializable {
     private MenuItem[] menuItems = {google,yandex,duck};
     @FXML
     private CheckMenuItem checkFullscreen;
+    @FXML
+    private CheckMenuItem blockPop;
+    @FXML
+    private CheckMenuItem verifySecurity;
     private WebEngine webEngine;
     public static Tab tab;
 
@@ -182,6 +186,16 @@ public class BrowserController implements Initializable {
     @FXML
     private void setYahoo(){
         WebUtil.setYahoo(webEngine,searchField);
+    }
+
+    @FXML
+    private void blockPopup(){
+        WebUtil.blockPopup(webEngine,blockPop);
+    }
+
+    @FXML
+    private void verifySiteSecurity(){
+        WebUtil.verifySite(webEngine,verifySecurity);
     }
 
 
