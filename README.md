@@ -44,7 +44,7 @@ A desktop web browser built with JavaFX, featuring tab management, bookmarks, hi
 
 ### Browsing History
 
-<img width="1914" height="1029" alt="Ekran görüntüsü 2025-10-19 012454" src="https://github.com/user-attachments/assets/d1536e82-0232-44fd-880d-2588a275bb91" />
+<img width="1917" height="1025" alt="Ekran görüntüsü 2025-10-19 014533" src="https://github.com/user-attachments/assets/de1b55a7-afdf-48b8-8577-ee54b352aa08" />
 
 
 ## 💻 Quick Setup
