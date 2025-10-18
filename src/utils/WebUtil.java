@@ -176,7 +176,7 @@ public class WebUtil {
 
     public static void screenshot(WebView webView){
         WritableImage image = webView.snapshot(new SnapshotParameters(), null);
-        File file = new File("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\screenshots\\screenshot_" + System.currentTimeMillis() + ".png");
+        File file = new File("src/screenshots" + System.currentTimeMillis() + ".png");
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
             WebAlerts.information("Screenshot saved to " + file.getAbsolutePath());
@@ -201,7 +201,7 @@ public class WebUtil {
     public static void addBookmarkToFile(String url) {
             bookmarks.add(url);
             try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\bookmarks\\bookmark.txt", true));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src/bookmarks/bookmark.txt", true));
                 writer.write(url +"\n");
                 writer.close();
             } catch (IOException e) {
@@ -211,7 +211,7 @@ public class WebUtil {
     }
 
     public static void readBookmark(){
-        File file = new File("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\bookmarks\\bookmark.txt");
+        File file = new File("src/bookmarks/bookmark.txt");
         try{
             Scanner reader = new Scanner(file);
             while(reader.hasNextLine()){
