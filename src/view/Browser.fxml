@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.web.WebView?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BrowserController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1850.0" stylesheets="@css/browser.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BrowserController">
    <children>
       <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" rotateGraphic="true" tabClosingPolicy="ALL_TABS">
         <tabs>
@@ -25,7 +25,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <top>
-                        <ToolBar prefHeight="40.0" prefWidth="1500.0" BorderPane.alignment="CENTER">
+                        <ToolBar prefHeight="55.0" prefWidth="2142.0" BorderPane.alignment="CENTER">
                           <items>
                             <Button mnemonicParsing="false" onAction="#backward">
                                  <graphic>
@@ -59,7 +59,7 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
-                              <TextField fx:id="searchField" onAction="#loadWeb" prefHeight="25.0" prefWidth="750.0" promptText="Search on Google or enter a URL" />
+                              <TextField fx:id="searchField" onAction="#loadWeb" prefHeight="25.0" prefWidth="928.0" promptText="Search on Google or enter a URL" />
                               <MenuBar>
                                 <menus>
                                   <Menu mnemonicParsing="false" text="View">
@@ -89,17 +89,51 @@
                                                 </ImageView>
                                              </graphic></CheckMenuItem>
                                     </items>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/monitor.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                   </Menu>
                                   <Menu mnemonicParsing="false" text="Bookmarks">
                                     <items>
-                                      <MenuItem mnemonicParsing="false" onAction="#addBookmark" text="Add Bookmark" />
-                                          <MenuItem mnemonicParsing="false" text="Add Bookmark" />
+                                      <MenuItem mnemonicParsing="false" onAction="#addBookmark" text="Add Bookmark">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/bookmark.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></MenuItem>
                                     </items>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/menu.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                   </Menu>
                                     <Menu mnemonicParsing="false" text="Web History">
                                       <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#historyTab" text="History" />
+                                        <MenuItem mnemonicParsing="false" onAction="#historyTab" text="History">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/webhistory.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></MenuItem>
                                       </items>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/clock.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Menu>
                                   <Menu mnemonicParsing="false" text="Tools">
                                     <items>
@@ -120,6 +154,13 @@
                                                 </ImageView>
                                              </graphic></MenuItem>
                                     </items>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/settings.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                   </Menu>
                                     <Menu mnemonicParsing="false" text="Browsers">
                                        <items>
@@ -169,24 +210,121 @@
                                              </graphic>
                                           </MenuItem>
                                        </items>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/browser.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Menu>
                                     <Menu mnemonicParsing="false" text="Settings">
                                        <items>
-                                          <MenuItem mnemonicParsing="false" text="Favorites" />
-                                          <MenuItem mnemonicParsing="false" text="URL Filter" />
-                                          <CheckMenuItem fx:id="blockPop" mnemonicParsing="false" onAction="#blockPopup" text="Pop-up Blocker" />
-                                          <CheckMenuItem fx:id="verifySecurity" mnemonicParsing="false" onAction="#verifySiteSecurity" text="Verify Site Security" />
+                                          <MenuItem mnemonicParsing="false" onAction="#urlFilter" text="URL Filter">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/filter.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></MenuItem>
+                                          <CheckMenuItem fx:id="blockPop" mnemonicParsing="false" onAction="#blockPopup" text="Pop-up Blocker">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/pop-up-blocker.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></CheckMenuItem>
+                                          <CheckMenuItem fx:id="verifySecurity" mnemonicParsing="false" onAction="#verifySiteSecurity" text="Verify Site Security">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@photos/shield.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></CheckMenuItem>
                                        </items>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/cogwheel.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Menu>
                                 </menus>
                               </MenuBar>
-                              <TextField fx:id="textSearch" onAction="#searchText" prefHeight="25.0" prefWidth="92.0" promptText="search text" />
-                              <MenuButton fx:id="bookmarkMenu" mnemonicParsing="false" onAction="#selectBookmark" text="Bookmarks" />
+                              <TextField fx:id="textSearch" onAction="#searchText" prefHeight="25.0" prefWidth="156.0" promptText="search text" />
+                              <MenuButton fx:id="bookmarkMenu" mnemonicParsing="false" onAction="#selectBookmark" text="Bookmarks">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@photos/star.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></MenuButton>
+                              <MenuButton fx:id="bookmarkMenu1" layoutX="1819.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectBookmark" prefHeight="38.0" prefWidth="150.0" text="Favorites">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@photos/favourite.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#handleFavoriteClick" text="Instagram">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/instagram.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#handleFavoriteClick" text="Facebook">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/facebook.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#handleFavoriteClick" text="YouTube">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/youtube.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#handleFavoriteClick" text="X">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/twitter.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#handleFavoriteClick" text="WhatsApp">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@photos/whatsapp.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                 </items>
+                              </MenuButton>
                           </items>
                         </ToolBar>
                      </top>
                      <center>
-                        <WebView fx:id="webView" prefHeight="331.0" prefWidth="651.0" BorderPane.alignment="CENTER" />
+                        <WebView fx:id="webView" prefHeight="815.0" prefWidth="2142.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </content>

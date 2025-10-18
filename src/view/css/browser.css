@@ -1,0 +1,398 @@
+/* Root styling */
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: #ffffff;
+    -fx-font-smoothing-type: gray;
+}
+
+/* StackPane - exact sizing */
+.stack-pane {
+    -fx-pref-height: 900;
+    -fx-pref-width: 1500;
+    -fx-background-color: #ffffff;
+}
+
+/* TabPane styling - exact sizing */
+.tab-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+    -fx-pref-height: 200;
+    -fx-pref-width: 200;
+    -fx-tab-min-height: 28;
+    -fx-tab-max-height: 28;
+}
+
+.tab-pane .tab-header-area {
+    -fx-background-color: #e8eaed;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: #e8eaed;
+}
+
+.tab-pane .headers-region {
+    -fx-background-color: #e8eaed;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #e8eaed;
+}
+
+/* Tab styling - Gray/White mix */
+.tab {
+    -fx-background-color: #d1d5db;
+    -fx-background-radius: 6 6 0 0;
+    -fx-padding: 4 16 4 10;
+    -fx-background-insets: 2 1 0 1;
+    -fx-pref-height: 28;
+    -fx-max-height: 28;
+    -fx-min-height: 28;
+}
+
+.tab:selected {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+}
+
+.tab:hover {
+    -fx-background-color: #c4c8cf;
+}
+
+.tab:selected:hover {
+    -fx-background-color: #f9fafb;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #4b5563;
+    -fx-font-size: 12px;
+    -fx-alignment: center;
+    -fx-padding: 0 8 0 0;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #1f2937;
+    -fx-font-weight: 500;
+}
+
+/* Tab close button - Gray visible X */
+.tab-pane .tab-close-button {
+    -fx-background-color: #9ca3af;
+    -fx-background-radius: 2;
+    -fx-padding: 0;
+    -fx-pref-width: 16;
+    -fx-pref-height: 16;
+    -fx-min-width: 16;
+    -fx-min-height: 16;
+    -fx-max-width: 16;
+    -fx-max-height: 16;
+    -fx-cursor: hand;
+}
+
+.tab-pane .tab-close-button:hover {
+    -fx-background-color: #6b7280;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+.tab-pane .tab-close-button .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 0;
+}
+
+.tab .tab-close-button {
+    -fx-background-color: #9ca3af;
+    -fx-background-radius: 2;
+    -fx-padding: 1;
+}
+
+.tab .tab-close-button:hover {
+    -fx-background-color: #6b7280;
+}
+
+.tab .tab-close-button .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+/* BorderPane - exact sizing */
+.border-pane {
+    -fx-background-color: #ffffff;
+    -fx-pref-height: 200;
+    -fx-pref-width: 200;
+}
+
+/* ToolBar styling - exact sizing */
+.tool-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent transparent #e0e0e0 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 12 8 12;
+    -fx-spacing: 6;
+    -fx-pref-height: 40;
+    -fx-pref-width: 1500;
+    -fx-alignment: center-left;
+}
+
+/* Button styling - navigation buttons */
+.button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50%;
+    -fx-padding: 8;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-pref-width: 32;
+    -fx-pref-height: 32;
+    -fx-min-width: 32;
+    -fx-min-height: 32;
+    -fx-max-width: 32;
+    -fx-max-height: 32;
+}
+
+.button:hover {
+    -fx-background-color: rgba(60, 64, 67, 0.08);
+}
+
+.button:pressed {
+    -fx-background-color: rgba(60, 64, 67, 0.12);
+}
+
+.button:focused {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+/* ImageView sizing for buttons */
+.button .image-view {
+    -fx-fit-height: 16;
+    -fx-fit-width: 13;
+    -fx-opacity: 0.75;
+    -fx-smooth: false;
+}
+
+.button:hover .image-view {
+    -fx-opacity: 1.0;
+}
+
+/* Search field styling - exact sizing */
+.search-field {
+    -fx-background-color: #f1f3f4;
+    -fx-background-radius: 20;
+    -fx-border-color: transparent;
+    -fx-border-radius: 20;
+    -fx-padding: 6 16 6 16;
+    -fx-pref-height: 25;
+    -fx-pref-width: 750;
+    -fx-font-size: 14px;
+    -fx-text-fill: #202124;
+    -fx-prompt-text-fill: #5f6368;
+    -fx-font-smoothing-type: gray;
+}
+
+.search-field:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1a73e8;
+    -fx-border-width: 2;
+    -fx-background-insets: -1;
+    -fx-border-insets: -1;
+    -fx-effect: dropshadow(gaussian, rgba(26, 115, 232, 0.3), 8, 0, 0, 1);
+}
+
+.search-field:hover {
+    -fx-background-color: #e8eaed;
+}
+
+.search-field:focused:hover {
+    -fx-background-color: #ffffff;
+}
+
+/* Text search field - exact sizing */
+.text-search {
+    -fx-background-color: #f1f3f4;
+    -fx-background-radius: 16;
+    -fx-border-color: transparent;
+    -fx-border-radius: 16;
+    -fx-padding: 4 12 4 12;
+    -fx-pref-height: 25;
+    -fx-pref-width: 92;
+    -fx-font-size: 12px;
+    -fx-text-fill: #202124;
+    -fx-prompt-text-fill: #5f6368;
+    -fx-font-smoothing-type: gray;
+}
+
+.text-search:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1a73e8;
+    -fx-border-width: 2;
+    -fx-background-insets: -1;
+    -fx-border-insets: -1;
+}
+
+.text-search:hover {
+    -fx-background-color: #e8eaed;
+}
+
+/* MenuBar styling */
+.menu-bar {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+.menu-bar .menu {
+    -fx-background-color: transparent;
+    -fx-padding: 4 8 4 8;
+}
+
+.menu-bar .menu:hover,
+.menu-bar .menu:showing {
+    -fx-background-color: rgba(60, 64, 67, 0.08);
+    -fx-background-radius: 4;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #3c4043;
+    -fx-font-size: 13px;
+    -fx-padding: 0;
+    -fx-font-weight: 400;
+}
+
+/* Menu styling */
+.context-menu {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-border-color: #dadce0;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 12, 0, 0, 4);
+    -fx-padding: 8;
+}
+
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-padding: 8 12 8 12;
+    -fx-background-radius: 4;
+}
+
+.menu-item:hover,
+.menu-item:focused {
+    -fx-background-color: #f1f3f4;
+}
+
+.menu-item .label {
+    -fx-text-fill: #202124;
+    -fx-font-size: 13px;
+    -fx-font-weight: 400;
+}
+
+.menu-item .image-view {
+    -fx-fit-height: 25;
+    -fx-fit-width: 20;
+    -fx-smooth: false;
+}
+
+.check-menu-item .check {
+    -fx-background-color: #1a73e8;
+}
+
+/* MenuButton styling */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 4;
+    -fx-padding: 4 12 4 12;
+    -fx-text-fill: #3c4043;
+    -fx-border-color: #dadce0;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-cursor: hand;
+}
+
+.menu-button:hover {
+    -fx-background-color: rgba(60, 64, 67, 0.08);
+    -fx-border-color: #80868b;
+}
+
+.menu-button:pressed,
+.menu-button:showing {
+    -fx-background-color: rgba(60, 64, 67, 0.12);
+}
+
+.menu-button .label {
+    -fx-text-fill: #3c4043;
+    -fx-font-size: 13px;
+    -fx-font-weight: 400;
+}
+
+/* WebView styling - exact sizing */
+.web-view {
+    -fx-background-color: #ffffff;
+    -fx-pref-height: 331;
+    -fx-pref-width: 651;
+    -fx-font-smoothing-type: gray;
+}
+
+/* Scrollbar styling - sharper */
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(95, 99, 104, 0.4);
+    -fx-background-radius: 2;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: rgba(95, 99, 104, 0.6);
+}
+
+.scroll-bar .thumb:pressed {
+    -fx-background-color: rgba(95, 99, 104, 0.8);
+}
+
+.scroll-bar .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-pref-height: 0;
+    -fx-pref-width: 0;
+}
+
+/* Separator styling */
+.separator {
+    -fx-background-color: #dadce0;
+}
+
+/* Remove focus indicators */
+.button:focused,
+.menu-button:focused,
+.menu:focused,
+.text-field:focused,
+.menu-item:focused {
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Global focus color removal */
+* {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Sharp text rendering */
+.label,
+.text,
+.text-field {
+    -fx-font-smoothing-type: gray;
+}

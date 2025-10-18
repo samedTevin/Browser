@@ -2,6 +2,7 @@ package controller;
 
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,10 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.controlsfx.control.textfield.TextFields;
+import utils.WebTab;
 import utils.WebUtil;
 
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,13 +32,6 @@ public class BrowserController implements Initializable {
     @FXML
     private MenuButton bookmarkMenu;
     @FXML
-    private MenuItem google;
-    @FXML
-    private MenuItem yandex;
-    @FXML
-    private MenuItem duck;
-    private MenuItem[] menuItems = {google,yandex,duck};
-    @FXML
     private CheckMenuItem checkFullscreen;
     @FXML
     private CheckMenuItem blockPop;
@@ -49,7 +44,10 @@ public class BrowserController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         webEngine = webView.getEngine();
         home();
+        WebUtil.urlFilter(webEngine);
         TabContentController.tabPane = tabPane;
+        WebUtil.readBookmark();
+        WebUtil.setHistory(webEngine);
         selectBookmark();
         TextFields.bindAutoCompletion(searchField,WebUtil.bookmarks);
     }
@@ -70,10 +68,6 @@ public class BrowserController implements Initializable {
        WebUtil.backward(webEngine);
     }
 
-    @FXML
-    private void History(){
-
-    }
 
     @FXML
     private void zoomIn(){
@@ -116,12 +110,14 @@ public class BrowserController implements Initializable {
     private void historyTab(){
         try{
             tab = new Tab("History");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HistoryTab.fxml"));
-            Parent controller = loader.load();
-
-            tab.setContent(controller);
+            FXMLLoader loader = new FXMLLoader(WebTab.class.getResource("/view/HistoryTab.fxml"));
+            Parent root = loader.load();
+            tab.setContent(root);
             tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab);
             tabPane.getSelectionModel().select(tab);
+            HistoryTabController controller = loader.getController();
+            controller.setWebEngine(webEngine);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -152,7 +148,7 @@ public class BrowserController implements Initializable {
     }
 
     @FXML
-    private void addBookmark() throws IOException {
+    private void addBookmark(){
         WebUtil.addBookmark(webView);
         selectBookmark();
         TextFields.bindAutoCompletion(searchField,WebUtil.bookmarks);
@@ -198,11 +194,15 @@ public class BrowserController implements Initializable {
         WebUtil.verifySite(webEngine,verifySecurity);
     }
 
+    @FXML
+    private void urlFilter(){
+        WebTab.createTab(tab,tabPane,"URL Filter","/view/URLFilter.fxml");
+    }
 
-
-
-
-
+    @FXML
+    private void handleFavoriteClick(ActionEvent event){
+        WebUtil.handleFavorite(event, webView);
+    }
 
 
 }

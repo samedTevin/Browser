@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1850.0" stylesheets="@css/urlfilter.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UrlFilterTabController">
+   <top>
+      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="1850.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="74.0" prefWidth="290.0" styleClass="title-label" text=" URL Filter Manager" />
+            <Separator prefWidth="1850.0" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox prefHeight="615.0" prefWidth="1850.0" spacing="10.0" styleClass="input-container" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="74.0" prefWidth="1830.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="textField" prefHeight="25.0" prefWidth="269.0" promptText="Enter URL to block" />
+                  <Button mnemonicParsing="false" onAction="#addUrl" text="Add" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <ListView fx:id="urlList" prefHeight="468.0" prefWidth="1030.0">
+               <VBox.margin>
+                  <Insets left="400.0" right="400.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding></ListView>
+            <HBox alignment="CENTER" prefHeight="225.0" prefWidth="1830.0" spacing="20.0" styleClass="button-container">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#removeAllUrls" text="Clear All" />
+                  <Button mnemonicParsing="false" onAction="#removeUrl" prefHeight="74.0" prefWidth="236.0" text="Remove Selected" />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <bottom>
+      <VBox prefHeight="122.0" prefWidth="1850.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator prefWidth="1850.0" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER" prefHeight="90.0" prefWidth="1850.0" spacing="10.0" styleClass="status-container">
+               <children>
+                  <Label prefHeight="34.0" prefWidth="174.0" styleClass="blocked-label" text="Total Blocked URLs:">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@photos/prohibition.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label fx:id="totalBlocked" styleClass="status-label">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="34.0" prefWidth="117.0" styleClass="added-label" text="Last added:">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@photos/plus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label fx:id="lastAdded" styleClass="status-label">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label styleClass="removed-label" text="Last Removed:">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@photos/remove.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label fx:id="lastRemoved" styleClass="status-label">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="100.0" right="100.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>

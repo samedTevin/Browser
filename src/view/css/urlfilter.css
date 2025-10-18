@@ -1,0 +1,220 @@
+/* Root styling */
+.root {
+    -fx-background-color: #f5f5f5;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* Title Label - Better Professional Design */
+.title-label {
+    -fx-font-size: 32px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #1f2937;
+    -fx-padding: 30px 0 30px 0;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0, 0, 2);
+}
+
+/* Text Field */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 14px;
+    -fx-pref-width: 350px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 3, 0, 0, 1);
+}
+
+.text-field:focused {
+    -fx-border-color: #4a90e2;
+    -fx-border-width: 2px;
+}
+
+.text-field:hover {
+    -fx-border-color: #999999;
+}
+
+/* Simple Gray Browser-Style Buttons */
+.button {
+    -fx-background-color: #f8f9fa;
+    -fx-text-fill: #3c4043;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10px 24px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-min-width: 180px;
+    -fx-min-height: 45px;
+    -fx-pref-height: 36px;
+    -fx-border-color: #dadce0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+.button:hover {
+    -fx-background-color: #f1f3f4;
+    -fx-text-fill: #3c4043;
+    -fx-border-color: #5f6368;
+}
+
+.button:pressed {
+    -fx-background-color: #e8eaed;
+    -fx-text-fill: #3c4043;
+    -fx-border-color: #5f6368;
+}
+
+.button > .text {
+    -fx-fill: #3c4043;
+}
+
+.button:hover > .text {
+    -fx-fill: #3c4043;
+}
+
+.button:pressed > .text {
+    -fx-fill: #3c4043;
+}
+
+/* List View */
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+
+.list-view .list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #333333;
+    -fx-padding: 12px 20px;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #eeeeee;
+    -fx-font-size: 14px;
+}
+
+.list-view .list-cell:filled:hover {
+    -fx-background-color: #f9f9f9;
+}
+
+.list-view .list-cell:filled:selected {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #1976d2;
+}
+
+.list-view .list-cell:filled:selected:hover {
+    -fx-background-color: #bbdefb;
+}
+
+.list-view:focused .list-cell:filled:selected {
+    -fx-background-color: #2196f3;
+    -fx-text-fill: white;
+}
+
+/* Status Labels Container */
+.status-container {
+    -fx-padding: 20px 0 0 0;
+    -fx-spacing: 30px;
+}
+
+/* Status Labels */
+.status-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-padding: 12px 25px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 2);
+}
+
+/* Total Blocked URLs Label */
+.blocked-label {
+    -fx-background-color: linear-gradient(to right, #ffebee, #ffcdd2);
+    -fx-text-fill: #b71c1c;
+    -fx-border-color: #ef5350;
+    -fx-border-width: 2px;
+    -fx-font-weight: bold;
+}
+
+/* Last Added Label */
+.added-label {
+    -fx-background-color: linear-gradient(to right, #e8f5e9, #c8e6c9);
+    -fx-text-fill: #1b5e20;
+    -fx-border-color: #66bb6a;
+    -fx-border-width: 2px;
+    -fx-font-weight: bold;
+}
+
+/* Last Removed Label */
+.removed-label {
+    -fx-background-color: linear-gradient(to right, #fff3e0, #ffe0b2);
+    -fx-text-fill: #e65100;
+    -fx-border-color: #ff9800;
+    -fx-border-width: 2px;
+    -fx-font-weight: bold;
+}
+
+/* Scroll Bar Styling */
+.list-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.list-view .scroll-bar:vertical .track {
+    -fx-background-color: #f5f5f5;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #cccccc;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+.list-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #999999;
+}
+
+.list-view .scroll-bar .increment-button,
+.list-view .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/* Input Container */
+.input-container {
+    -fx-spacing: 10px;
+    -fx-padding: 0 0 20px 0;
+}
+
+/* Button Container */
+.button-container {
+    -fx-spacing: 15px;
+    -fx-padding: 20px 0;
+}
+
+/* Separator Styling */
+.separator {
+    -fx-background-color: transparent;
+}
+
+.separator .line {
+    -fx-background-color: linear-gradient(to right, transparent, #bdbdbd 20%, #bdbdbd 80%, transparent);
+    -fx-border-width: 0;
+    -fx-pref-height: 2px;
+    -fx-padding: 10px 0;
+}
+
+.separator:horizontal .line {
+    -fx-pref-height: 2px;
+    -fx-border-width: 0;
+}
+
+.separator:vertical .line {
+    -fx-pref-width: 2px;
+    -fx-border-width: 0;
+}

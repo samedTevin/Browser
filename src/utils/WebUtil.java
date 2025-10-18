@@ -1,6 +1,10 @@
 package utils;
 
+
+import controller.HistoryTabController;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Worker;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.print.PrinterJob;
 import javafx.scene.SnapshotParameters;
@@ -13,26 +17,22 @@ import javafx.stage.Stage;
 
 
 import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 public class WebUtil {
 
-    private static WebHistory history;
+    public static WebHistory history;
     public static Stage stage;
     private static Map<Tab, Double> zoomLevels = new HashMap<Tab, Double>();
     private static double zoom;
-    public static List<String> bookmarks = new ArrayList<String>();
+    public static Set<String> bookmarks = new HashSet<>();
     public static String currentBrowser = "Google";
+    public static Set<String> blockedUrls = new HashSet<>();
+    private static HistoryTabController historyTabController;
 
 
 
@@ -55,21 +55,16 @@ public class WebUtil {
             url = "http://" + textField;
         }
         else{
-            if(currentBrowser.equals("Google")){
-                url = "https://www.google.com/search?q=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
-            }
-            else if(currentBrowser.equals("Yandex")){
-                url = "https://yandex.com/search/?text=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
-            }
-            else if(currentBrowser.equals("DuckDuckGo")){
-                url ="https://duckduckgo.com/?q=" +  URLEncoder.encode(textField, StandardCharsets.UTF_8);
-            }
-            else if(currentBrowser.equals("Bing")){
-                url = "https://www.bing.com/search?q" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
-            }
-            else{
-                url = "https://search.yahoo.com/search?p=" +  URLEncoder.encode(textField, StandardCharsets.UTF_8);
-            }
+            url = switch (currentBrowser) {
+                case "Google" ->
+                        "https://www.google.com/search?q=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
+                case "Yandex" ->
+                        "https://yandex.com/search/?text=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
+                case "DuckDuckGo" ->
+                        "https://duckduckgo.com/?q=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
+                case "Bing" -> "https://www.bing.com/search?q" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
+                default -> "https://search.yahoo.com/search?p=" + URLEncoder.encode(textField, StandardCharsets.UTF_8);
+            };
         }
 
         searchField.setText(url);
@@ -140,30 +135,16 @@ public class WebUtil {
 
     public static void home( String home, TextField searchField, WebEngine webEngine) {
 
-        String homeUrl;
+        String homeUrl = switch (currentBrowser) {
+            case "Google" -> "https://www.google.com";
+            case "Yandex" -> "https://www.yandex.com";
+            case "DuckDuckGo" -> "https://duckduckgo.com/";
+            case "Bing" -> "https://www.bing.com";
+            default -> "https://www.yahoo.com";
+        };
 
-        if(currentBrowser.equals("Google")){
-            homeUrl = "https://www.google.com";
-        }
-        else if(currentBrowser.equals("Yandex")){
-            homeUrl = "https://www.yandex.com";
-        }
-        else if(currentBrowser.equals("DuckDuckGo")){
-            homeUrl = "https://duckduckgo.com/";
-        }
-        else if(currentBrowser.equals("Bing")){
-            homeUrl = "https://www.bing.com";
-        }
-        else{
-            homeUrl ="https://www.yahoo.com";
-        }
-        searchField.setPromptText("Enter a URL or search on " + currentBrowser);
+        searchField.setPromptText("Search on " + currentBrowser + " or enter a URL");
         webEngine.load(homeUrl);
-    }
-
-    public static void history(WebEngine webEngine) {
-        history = webEngine.getHistory();
-        ObservableList<WebHistory.Entry> entries = history.getEntries();
     }
 
     public static void printPage(WebView webView) {
@@ -210,24 +191,38 @@ public class WebUtil {
     }
 
     public static void fullScreen(CheckMenuItem menuItem){
-        if(menuItem.isSelected()){
-            stage.setFullScreen(true);
-        }
-        else{
-            stage.setFullScreen(false);
-        }
+        stage.setFullScreen(menuItem.isSelected());
     }
 
     public static void addBookmark(WebView webView) {
-        Path filePath = Paths.get("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\bookmarks\\bookmark.txt");
         String url = webView.getEngine().getLocation();
-        bookmarks.add(url);
-        try {
-            Files.write(filePath,bookmarks,StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        addBookmarkToFile(url);
+    }
+
+    public static void addBookmarkToFile(String url) {
+            bookmarks.add(url);
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\bookmarks\\bookmark.txt", true));
+                writer.write(url +"\n");
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            WebAlerts.information("Bookmark added successfully");
+    }
+
+    public static void readBookmark(){
+        File file = new File("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\bookmarks\\bookmark.txt");
+        try{
+            Scanner reader = new Scanner(file);
+            while(reader.hasNextLine()){
+                String line = reader.nextLine();
+                bookmarks.add(line);
+            }
         }
-        WebAlerts.information("Bookmark added successfully");
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     public static void selectBookmark(MenuButton menuButton, WebView webView){
@@ -238,7 +233,6 @@ public class WebUtil {
             menuButton.getItems().add(menuItem);
         }
     }
-
 
     public static void setGoogle(WebEngine webEngine, TextField search){
         currentBrowser = "Google";
@@ -265,14 +259,11 @@ public class WebUtil {
         home(currentBrowser, search, webEngine);
     }
 
-    public static void historyTab(){
-
-    }
 
     public static void blockPopup(WebEngine webEngine, CheckMenuItem menuItem){
         if(menuItem.isSelected()){
             webEngine.setCreatePopupHandler(config ->{
-                WebAlerts.warning("Popup blocked: " + config.isResizable());
+                Platform.runLater(() -> WebAlerts.warning("Popup blocked!"));
             return null;
         });
         }
@@ -285,12 +276,64 @@ public class WebUtil {
             webEngine.locationProperty().addListener((observable, oldValue, newValue) -> {
                 if(menuItem.isSelected()){
                     if(!newValue.startsWith("https://")){
-                        WebAlerts.warning("Unsecure URL: " + newValue);
+                        Platform.runLater(() -> WebAlerts.warning("Unsecure URL: " + newValue));
                     }
                 }
             });
-
     }
+
+    private static String normalize(String url){
+        if(url == null) return "";
+        url = url.replaceFirst("https?://","").replaceFirst("www\\.","");
+        return url.split("/")[0];
+    }
+
+    public static void urlFilter(WebEngine webEngine){
+        webEngine.locationProperty().addListener((observable, oldValue, newValue) -> {
+            String normNew = normalize(newValue);
+            for(String site: blockedUrls){
+                String url = normalize(site);
+                if(normNew.equals(url)){
+                    Platform.runLater(() -> {
+                        webEngine.load("auto:blank");
+                        WebAlerts.warning("Blocked URL: " + newValue);
+                    });
+                    break;
+                }
+            }
+        });
+    }
+
+    public static void handleFavorite(javafx.event.ActionEvent event , WebView webView){
+        MenuItem menuItem = (MenuItem) event.getSource();
+        String itemName = menuItem.getText();
+
+        String url = switch (itemName) {
+            case "Instagram" -> "https://www.instagram.com";
+            case "YouTube" -> "https://www.youtube.com";
+            case "Facebook" -> "https://www.facebook.com";
+            case "X" -> "https://x.com";
+            case "WhatsApp" -> "https://web.whatsapp.com";
+            default -> null;
+        };
+
+        if(url != null){
+            webView.getEngine().load(url);
+        }
+    }
+
+    public static  void setHistory(WebEngine webEngine){
+        webEngine.getLoadWorker().stateProperty().addListener((observable, oldState, newState) -> {
+            if(newState == Worker.State.SUCCEEDED){
+                String title = webEngine.getTitle();
+                String url = webEngine.getLocation();
+                if(historyTabController != null && url != null && !url.isEmpty() ){
+                    historyTabController.addHistory(title != null ? title : "Untitled", url);
+                }
+            }
+        });
+    }
+
 
 
 
