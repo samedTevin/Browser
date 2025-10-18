@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1850.0" styleClass="root" stylesheets="@css/urlfilter.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HistoryTabController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1850.0" stylesheets="@css/history.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HistoryTabController">
     <top>
         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="1850.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
@@ -19,9 +19,9 @@
         </VBox>
     </top>
     <center>
-        <VBox prefHeight="648.0" prefWidth="1830.0" spacing="15.0" BorderPane.alignment="CENTER">
+        <VBox maxHeight="500.0" prefHeight="500.0" prefWidth="1500.0" spacing="15.0" BorderPane.alignment="CENTER">
             <children>
-                <ListView fx:id="historyList" maxHeight="538.0" prefHeight="538.0" prefWidth="1730.0" VBox.vgrow="ALWAYS">
+                <ListView fx:id="historyList" maxHeight="538.0" prefHeight="0.0" prefWidth="1730.0" VBox.vgrow="ALWAYS">
                     <VBox.margin>
                         <Insets left="50.0" right="50.0" top="20.0" />
                     </VBox.margin>
@@ -33,17 +33,20 @@
         </VBox>
     </center>
     <bottom>
-        <VBox prefHeight="100.0" prefWidth="1850.0" BorderPane.alignment="CENTER">
+        <VBox BorderPane.alignment="CENTER">
             <children>
-                <Separator prefWidth="1850.0" />
-                <HBox alignment="CENTER" prefWidth="1850.0" spacing="15.0">
+            <Separator prefWidth="200.0" />
+                <HBox alignment="CENTER" prefHeight="71.0" prefWidth="1850.0" spacing="15.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#removeHistory" text="Remove Selected" />
+                        <Button mnemonicParsing="false" onAction="#removeHistory" prefHeight="55.0" prefWidth="222.0" text="Remove Selected" />
                         <Button mnemonicParsing="false" onAction="#removeAllHistory" text="Remove All" />
                     </children>
                     <padding>
                         <Insets bottom="20.0" top="20.0" />
                     </padding>
+               <VBox.margin>
+                  <Insets bottom="200.0" />
+               </VBox.margin>
                 </HBox>
             </children>
         </VBox>
