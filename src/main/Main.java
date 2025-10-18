@@ -10,10 +10,14 @@ import utils.WebUtil;
 
 
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
+        Logger.getLogger("com.sun.javafx.webkit").setLevel(Level.SEVERE);
+        Logger.getLogger("javafx.scene.web").setLevel(Level.OFF);
         launch(args);
     }
 

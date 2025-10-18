@@ -3,7 +3,6 @@ package utils;
 
 import controller.HistoryTabController;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.print.PrinterJob;
@@ -322,13 +321,15 @@ public class WebUtil {
         }
     }
 
-    public static  void setHistory(WebEngine webEngine){
-        webEngine.getLoadWorker().stateProperty().addListener((observable, oldState, newState) -> {
-            if(newState == Worker.State.SUCCEEDED){
-                String title = webEngine.getTitle();
+    public static void setupHistoryTracking(WebEngine webEngine) {
+        webEngine.getLoadWorker().stateProperty().addListener((obs, old, state) -> {
+            if(state == Worker.State.SUCCEEDED){
                 String url = webEngine.getLocation();
-                if(historyTabController != null && url != null && !url.isEmpty() ){
-                    historyTabController.addHistory(title != null ? title : "Untitled", url);
+                if(url != null && !url.isEmpty() && !url.equals("about:blank")){
+                    try (BufferedWriter w = new BufferedWriter(new FileWriter("src/WebHistory/history.txt", true))) {
+                        w.write((webEngine.getTitle() != null ? webEngine.getTitle() : "Untitled") + "-" + url);
+                        w.newLine();
+                    } catch (Exception e) {}
                 }
             }
         });

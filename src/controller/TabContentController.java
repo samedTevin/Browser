@@ -1,6 +1,6 @@
 package controller;
 
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -44,6 +44,7 @@ public class TabContentController implements Initializable {
         webEngine = webView.getEngine();
         tabHome();
         WebUtil.urlFilter(webEngine);
+        WebUtil.setupHistoryTracking(webEngine);
         tabSelectBookmark();
         TextFields.bindAutoCompletion(tabSearchField,WebUtil.bookmarks);
     }
@@ -176,12 +177,6 @@ public class TabContentController implements Initializable {
     private void tabUrlFilter(){
         WebTab.createTab(tab,tabPane,"URL Filter","/view/URLFilter.fxml");
     }
-
-    @FXML
-    private void tabHandleFavorite(ActionEvent event){
-        WebUtil.handleFavorite(event, webView);
-    }
-
 
 
 }

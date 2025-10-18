@@ -45,9 +45,9 @@ public class BrowserController implements Initializable {
         webEngine = webView.getEngine();
         home();
         WebUtil.urlFilter(webEngine);
+        WebUtil.setupHistoryTracking(webEngine);
         TabContentController.tabPane = tabPane;
         WebUtil.readBookmark();
-        WebUtil.setHistory(webEngine);
         selectBookmark();
         TextFields.bindAutoCompletion(searchField,WebUtil.bookmarks);
     }
@@ -117,6 +117,7 @@ public class BrowserController implements Initializable {
             tabPane.getSelectionModel().select(tab);
             HistoryTabController controller = loader.getController();
             controller.setWebEngine(webEngine);
+
 
         } catch (Exception e) {
             e.printStackTrace();

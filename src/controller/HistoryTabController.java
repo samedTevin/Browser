@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
+import utils.WebUtil;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -22,23 +23,15 @@ public class HistoryTabController {
     private ListView<String> historyList;
     private WebHistory history;
     private WebEngine webEngine;
+    private static final String HISTORY_FILE = "src/WebHistory/history.txt";
 
 
     public void setWebEngine(WebEngine webEngine) {
         this.webEngine = webEngine;
         loadHistoryFromFile();
-        getHistory();
+
     }
 
-    private void getHistory(){
-        if(webEngine == null) return;
-        history = webEngine.getHistory();
-        ObservableList<String> entries = FXCollections.observableArrayList();
-        for(WebHistory.Entry entry : history.getEntries()){
-            entries.add(entry.getTitle() + "-" + entry.getUrl());
-        }
-        historyList.setItems(entries);
-    }
 
     private void loadHistoryFromFile()  {
         File file = new File("src/WebHistory/history.txt");
@@ -55,26 +48,6 @@ public class HistoryTabController {
             throw new RuntimeException(e);
         }
     }
-
-    public void addHistory(String title, String url){
-        File file = new File("src/WebHistory/history.txt");
-        try{
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
-
-            String historyEntry = title + "-" + url;
-
-            historyList.getItems().add(historyEntry);
-
-            writer.write(historyEntry);
-            writer.newLine();
-            writer.flush();
-            writer.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
 
     @FXML
     private void removeHistory(){

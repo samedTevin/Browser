@@ -54,7 +54,7 @@ public class UrlFilterTabController implements Initializable {
             String url = textField.getText().trim();
             urlList.getItems().add(url);
             WebUtil.blockedUrls.add(url);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\BlockedUrls\\blocked.txt",true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/BlockedUrls/blocked.txt",true));
             writer.write(url);
             writer.newLine();
             writer.close();
@@ -70,7 +70,7 @@ public class UrlFilterTabController implements Initializable {
     }
 
     private void readUrl(){
-        File file = new File("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\BlockedUrls\\blocked.txt");
+        File file = new File("src/BlockedUrls/blocked.txt");
         try{
             Scanner reader = new Scanner(file);
             while(reader.hasNextLine()){
@@ -87,7 +87,7 @@ public class UrlFilterTabController implements Initializable {
     private void removeUrl(){
         int selectedIndex = urlList.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
-            File file = new File("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\BlockedUrls\\blocked.txt");
+            File file = new File("src/BlockedUrls/blocked.txt");
             try{
 
                 List<String> lines = new ArrayList<>();
@@ -103,7 +103,7 @@ public class UrlFilterTabController implements Initializable {
                 urlList.getItems().remove(selectedIndex);
                 WebUtil.blockedUrls.remove(toRemove);
 
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(file,false));
                 for(String line : lines){
                     writer.write(line);
                     writer.newLine();
@@ -120,7 +120,7 @@ public class UrlFilterTabController implements Initializable {
 
     @FXML
     private void removeAllUrls(){
-        File file = new File("C:\\Users\\PC\\Desktop\\browser\\Browser\\src\\BlockedUrls\\blocked.txt");
+        File file = new File("src/BlockedUrls/blocked.txt");
         urlList.getItems().clear();
         WebUtil.blockedUrls.clear();
         try {
